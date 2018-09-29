@@ -7,6 +7,8 @@ public class Counter {
 
     private int count = 0;
 
+    private final Object lock = new Object();
+
     public static void main(String[] args) throws InterruptedException {
         Counter counter = new Counter();
         counter.process();
@@ -16,7 +18,16 @@ public class Counter {
         IntConsumer intConsumer = (i) -> {
             sleep();
 //            count++; // this will not give 200
-            increment();
+
+//            increment(); // solution 1: synchronized method
+
+//            synchronized (this) { // solution 2: synchronized block
+//                count++;
+//            }
+
+            synchronized (lock) { // solution 3: synchronized block with separate lock object
+                count++;
+            }
         };
         Thread t1 = new Thread(() -> IntStream.range(0, 100).forEach(intConsumer));
         Thread t2 = new Thread(() -> IntStream.range(0, 100).forEach(intConsumer));
