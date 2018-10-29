@@ -11,6 +11,8 @@ public class SemaphoreApp {
 		ExecutorService executorService = Executors.newCachedThreadPool();
 		
 		IntStream.range(0, 12).forEach(i -> executorService.execute(() -> Downloader.INSTANCE.downloadData()));
+		
+		executorService.shutdown();
 	}
 
 }
