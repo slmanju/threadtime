@@ -3,8 +3,8 @@ package com.manjula.threadbasic;
 public class Concurrent {
 
     public static void main(String[] args) {
-        Thread runner1 = new Thread(new ThreadRunner("R1"));
-        Thread runner2 = new Thread(new ThreadRunner("R2"));
+        Thread runner1 = new Thread(new ThreadRunner("Thread-1"));
+        Thread runner2 = new Thread(new ThreadRunner("Thread-2"));
 
         runner1.start();
         runner2.start();
